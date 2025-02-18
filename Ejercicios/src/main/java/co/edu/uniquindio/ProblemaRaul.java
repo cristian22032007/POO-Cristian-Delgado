@@ -19,13 +19,21 @@ public class ProblemaRaul {
         this.telefono = telefono;
         this.edad = edad;
     }
+    public void mostrarInformacion() {
+        System.out.println("--------------------------------");
+        System.out.println("Identificación: "  + identificacion);
+        System.out.println("Nombre: " + nombres + " " + apellidos);
+        System.out.println("Correo: " + correo);
+        System.out.println("Teléfono: " + telefono);
+        System.out.println("Edad: " + edad);
+    }
 }
 class GenerarEstudiante {
     public static void main(String[] args) {
         ArrayList<ProblemaRaul> estudiantes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             System.out.print("\nRESGISTRO DE ESTUDIANTES\n");
             System.out.print("Ingrese el numero de identificacion: ");
             String identificacion = scanner.nextLine();
@@ -45,10 +53,13 @@ class GenerarEstudiante {
 
             System.out.println("Desea registrar nuevamente(s/n): ");
             String respuesta = scanner.nextLine();
-            if (respuesta.equalsIgnoreCase("n")){
+            if (respuesta.equalsIgnoreCase("n")) {
                 System.out.println("Programa finalizado");
                 break;
             }
         }
+        for (ProblemaRaul estudiante : estudiantes) {
+            estudiante.mostrarInformacion();
+            }
+        }
     }
-}
