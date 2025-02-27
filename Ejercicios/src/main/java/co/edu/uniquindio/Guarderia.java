@@ -1,72 +1,111 @@
 package co.edu.uniquindio;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Guarderia {
-    private String nombre;
-    private int edad;
-    private char genero;
-    private String  identificacion;
-    private String alergias;
-    private String nombredeacudiente;
-    private String telefono;
 
-    public Guarderia (String nombre, int edad, char genero, String identificacion, String alergias, String nombredeacudiente, String telefono) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.genero = genero;
-        this.identificacion = identificacion;
-        this.alergias = alergias;
-        this.nombredeacudiente = nombredeacudiente;
-        this.telefono = telefono;
+    private String nombres;
+    private List<Ninio> listNinios;
+
+    public Guarderia(String nombres) {
+        this.nombres = nombres;
+        this.listNinios = new ArrayList<>();
     }
-    public void mostrarInformacion() {
-        System.out.println("--------------------------------");
-        System.out.println("Nombre: "  + nombre);
-        System.out.println("edad: "  + edad);
-        System.out.println("genero: " + genero);
-        System.out.println("identidicacion: " + identificacion);
-        System.out.println("alergias: " + alergias);
-        System.out.println("nombredeacudiente: " + nombredeacudiente);
-        System.out.println("telefono: " + telefono);
+
+    public boolean verificarNinio(Ninio ninio){
+        boolean existe = true;
+        for(Ninio ninios : listNinios){
+            if(ninios.getID().equals(ninio.getID())){
+                existe = false;
+            }
+        }
+        return existe;
     }
-}
-class GenerarMenor {
-    public static void main(String[] args) {
-        ArrayList<Guarderia> menores = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            System.out.print("\nRESGISTRO DE ESTUDIANTES\n");
-            System.out.print("Ingrese los nombre del menor: ");
-            String nombre = scanner.nextLine();
-            System.out.print("Ingrese el edad del menor: ");
-            int edad = scanner.nextInt();
-            scanner.nextLine();
-            System.out.print("Ingrese el genero del menor: ");
-            char genero = scanner.nextLine().charAt(0);
-            System.out.print("Ingrese el numero de identificacion: ");
-            String identificacion = scanner.nextLine();
-            System.out.print("Ingrese el alergias: ");
-            String alergias = scanner.nextLine();
-            System.out.print("Ingrese el nombre de acudiente: ");
-            String nombredeacudiente = scanner.nextLine();
-            System.out.print("Ingrese el numero de telefono: ");
-            String telefono = scanner.nextLine();
-
-            Guarderia menor = new Guarderia(nombre, edad, genero, identificacion, alergias, nombredeacudiente , telefono);
-            menores.add(menor);
-
-            System.out.println("Desea registrar nuevamente(s/n): ");
-            String respuesta = scanner.nextLine();
-            if (respuesta.equalsIgnoreCase("n")) {
-                System.out.println("Programa finalizado");
+    public void eliminarNinio(String ID){
+        Boolean ninioEliminar = false;
+        for(int i = 0; i < listNinios.size(); i++){
+            if(listNinios.get(i).getID().equals(ID)){
+                listNinios.remove(i);
+                ninioEliminar = true;
                 break;
             }
         }
-        for (Guarderia menor : menores) {
-            menor.mostrarInformacion();
+    }
+
+    public void actualizarNinio(String ID, Ninio ninio){
+        boolean ninioActualizar = false;
+        for(int i = 0; i < listNinios.size(); i++){
+            if(listNinios.get(i).getID().equals(ID)){
+                listNinios.set(i, ninio);
+                ninioActualizar = true;
+                break;
+            }
         }
+    }
+
+    public void almacenarNinios(Ninio ninio) {
+        if(verificarNinio(ninio)){
+            listNinios.add(ninio);
+            System.out.println("Niño almacenado com exito");
+        }else{
+            System.out.println("Niño ya esta almacenado");
+        }
+    }
+
+    public static int contarVocales(String nombres) {
+        int contador = 0;
+        nombres = nombres.toLowerCase();
+        for (char letra : nombres.toCharArray()) {
+            if ("aeiou".indexOf(letra) != -1) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public static boolean esPalindromo(String nombre) {
+        int longitud = nombre.length();
+        for (int i = 0; i < longitud / 2; i++) {
+            if (nombre.charAt(i) != nombre.charAt(longitud - 1 - i)) {
+                return false; // Si los caracteres no coinciden, no es palíndromo
+            }
+        }
+        return true;
+    }
+
+    public static int contarConsonantes(String nombres) {
+        int contador = 0;
+        nombres = nombres.toLowerCase();
+        for (char letra : nombres.toCharArray()) {
+            if ("aeiou".indexOf(letra) == -1) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    @Override
+    public String toString() {
+        return "Guarderia{" +
+                "nombres='" + nombres + '\'' +
+                ", listNinios=" + listNinios +
+                '}';
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public List<Ninio> getListNinios() {
+        return listNinios;
+    }
+
+    public void setListNinios(List<Ninio> listNinios) {
+        this.listNinios = listNinios;
     }
 }
