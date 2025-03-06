@@ -1,4 +1,4 @@
-package co.edu.uniquindio;
+package Ejercicios.src.main.java.co.edu.uniquindio;
 
 public class Ejercicio1 {
     //Imprimir los primeros 10 numeros naturales
@@ -13,3 +13,4 @@ public class Ejercicio1 {
         System.out.println(numerosNaturales());
     }
 }
+
