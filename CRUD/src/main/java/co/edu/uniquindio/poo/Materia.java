@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo;
 import Docente;
 import Estudiante;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Materia {
